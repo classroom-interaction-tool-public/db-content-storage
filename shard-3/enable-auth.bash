@@ -1,0 +1,1 @@
+docker-compose exec mongodb_shard_3_1 sh -c "echo '\nsecurity:\n  authorization: enabled' >> /etc/mongo/mongod-shard.conf"

@@ -1,0 +1,1 @@
+docker-compose exec mongodb_config_1 sh -c "echo '\nsecurity:\n  authorization: enabled' >> /etc/mongo/mongod-config.conf"

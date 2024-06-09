@@ -1,0 +1,18 @@
+# mvp-database/mongos/docker-compose.yml 
+services:
+  mongos:
+    container_name: mongos
+    image: mongo:latest
+    restart: always
+    command: mongos --config /etc/mongo/mongos.conf
+    ports:
+      - 30000:27017
+    volumes:
+      - ./scripts:/scripts
+      - ./mongos.conf:/etc/mongo/mongos.conf
+    networks:
+      - mongo-shared-network
+
+networks:
+  mongo-shared-network:
+    external: true

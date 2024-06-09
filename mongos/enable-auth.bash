@@ -1,0 +1,1 @@
+docker-compose exec mongos sh -c "echo '\nsecurity:\n  authorization: enabled' >> /etc/mongo/mongos.conf"

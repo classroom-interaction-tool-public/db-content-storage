@@ -1,0 +1,50 @@
+# mvp-database/config/docker-compose.yml
+services:
+  mongodb_config_1:
+    container_name: mongodb_config_1
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/mongod-config.conf
+    ports:
+      - 10001:27017
+    volumes:
+      - ./scripts:/scripts
+      - ./mongod-config.conf:/etc/mongo/mongod-config.conf
+      - mongodb_config_1:/data/db
+    networks:
+      - mongo-shared-network
+
+  mongodb_config_2:
+    container_name: mongodb_config_2
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/mongod-config.conf
+    ports:
+      - 10002:27017
+    volumes:
+      - ./mongod-config.conf:/etc/mongo/mongod-config.conf
+      - mongodb_config_2:/data/db
+    networks:
+      - mongo-shared-network
+
+  mongodb_config_3:
+    container_name: mongodb_config_3
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/mongod-config.conf
+    ports:
+      - 10003:27017
+    volumes:
+      - ./mongod-config.conf:/etc/mongo/mongod-config.conf
+      - mongodb_config_3:/data/db
+    networks:
+      - mongo-shared-network
+
+volumes:
+  mongodb_config_1: {}
+  mongodb_config_2: {}
+  mongodb_config_3: {}
+
+networks:
+  mongo-shared-network:
+    external: true

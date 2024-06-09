@@ -1,0 +1,50 @@
+# mvp-database/shard/docker-compose.yml
+services:
+  mongodb_shard_2_1:
+    container_name: mongodb_shard_2_1
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/shard-2.conf
+    ports:
+      - 20021:27017
+    volumes:
+      - ./scripts:/scripts
+      - ./shard-2.conf:/etc/mongo/shard-2.conf
+      - mongodb_shard_2_1:/data/db
+    networks:
+      - mongo-shared-network
+
+  mongodb_shard_2_2:
+    container_name: mongodb_shard_2_2
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/shard-2.conf
+    ports:
+      - 20022:27017
+    volumes:
+      - mongodb_shard_2_2:/data/db
+      - ./shard-2.conf:/etc/mongo/shard-2.conf
+    networks:
+      - mongo-shared-network
+
+  mongodb_shard_2_3:
+    container_name: mongodb_shard_2_3
+    image: mongo:latest
+    restart: always
+    command: mongod --config /etc/mongo/shard-2.conf
+    ports:
+      - 20023:27017
+    volumes:
+      - mongodb_shard_2_3:/data/db
+      - ./shard-2.conf:/etc/mongo/shard-2.conf
+    networks:
+      - mongo-shared-network
+
+volumes:
+  mongodb_shard_2_1: {}
+  mongodb_shard_2_2: {}
+  mongodb_shard_2_3: {}
+
+networks:
+  mongo-shared-network:
+    external: true
